@@ -126,6 +126,9 @@ CUDA_CALLABLE inline hash_grid_query_t hash_grid_query(uint64_t id, wp::vec3 pos
 
     query.grid = *(const HashGrid*)(id);
 
+    // always iterate direct neighbors
+    radius = max(query.grid.cell_width, radius);
+    
     // convert coordinate to grid
     query.x_start = int((pos[0]-radius)*query.grid.cell_width_inv);
     query.y_start = int((pos[1]-radius)*query.grid.cell_width_inv);
